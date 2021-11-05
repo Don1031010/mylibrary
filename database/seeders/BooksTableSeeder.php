@@ -54,5 +54,41 @@ class BooksTableSeeder extends Seeder
             'user_id' => 3,
             'category_id' => 3
         ]);
+        DB::table('books')->insert([
+            'title' => '思考の教室',
+            'slug' => '思考の教室',
+            'author' => '戸田山和久',
+            'publisher' => 'NHK出版',
+            'language' => 'Japanese',
+            'user_id' => 3,
+            'category_id' => 3
+        ]);
+        DB::table('books')->insert([
+            'title' => '死からの生還',
+            'slug' => '死からの生還',
+            'author' => '中村うさぎ',
+            'publisher' => '文藝春秋',
+            'language' => 'Japanese',
+            'user_id' => 3,
+            'category_id' => 2
+        ]);
+        DB::table('books')->insert([
+            'title' => '大東京23区散歩',
+            'slug' => '大東京23区散歩',
+            'author' => '泉麻人',
+            'publisher' => '講談社',
+            'language' => 'Japanese',
+            'user_id' => 2,
+            'category_id' => 1
+        ]);
+        DB::table('books')->insert([
+            'title' => 'さおだけ屋はなぜ潰れないのか',
+            'slug' => 'さおだけ屋はなぜ潰れないのか',
+            'author' => '山田真哉',
+            'publisher' => '光文社新書',
+            'language' => 'Japanese',
+            'user_id' => 2,
+            'category_id' => 1
+        ]);
     }
 }

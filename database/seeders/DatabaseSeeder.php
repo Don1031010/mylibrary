@@ -6,6 +6,7 @@ use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\Book;
 use App\Models\Category;
+use App\Models\Bookfile;
 
 class DatabaseSeeder extends Seeder
 {
@@ -21,6 +22,7 @@ class DatabaseSeeder extends Seeder
         Category::truncate();
 
         \App\Models\User::factory(3)->create();
+        Bookfile::factory(7)->create();
 
         $this->call(BooksTableSeeder::class);
         $this->call(CategoriesTableSeeder::class);

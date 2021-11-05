@@ -21,7 +21,9 @@ Route::get('/', function () {
     // });
 
     // return view('books', ['books' => Book::all() ]); // this introduces the n+1 problem!
-    return view('books', ['books' => Book::latest()->get() ]);
+    return view('books', [
+        'books' => Book::latest()->get() 
+    ]);
     // return view('books', ['books' => Book::latest()->with('category', 'user')->get() ]);
 });
 
