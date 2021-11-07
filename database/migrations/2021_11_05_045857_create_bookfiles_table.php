@@ -17,9 +17,11 @@ class CreateBookfilesTable extends Migration
             $table->id();
             $table->foreignId('book_id');
             $table->enum('format', ['audiobook', 'mobi', 'epub', 'docx', 'azw', 'azw3', 'pdf']);
+            $table->float('duration')->nullable(); // used for audiobooks
+            $table->string('narrator')->nullable();
             $table->string('filename');
-            $table->integer('num_of_files')->default(1);
-            $table->integer('total_size')->nullable();
+            $table->tinyInteger('num_of_files')->default(1); // multiple files for audiobooks
+            $table->float('total_size')->nullable();
             $table->timestamps();
         });
     }

@@ -21,7 +21,7 @@ class CreateBooksTable extends Migration
             $table->string('title');
             $table->text('discription')->nullable();
             $table->string('author');
-            // $table->number('format');
+            $table->string('edition', 50)->nullable();
             $table->enum('language', ['Japanese', 'English', 'Chinese']);
             $table->string('cover_image')->nullable();
             $table->string('publication_year', 4)->nullable();

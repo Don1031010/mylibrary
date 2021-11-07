@@ -12,7 +12,7 @@ class Book extends Model
     protected $fillable = ['title', 'author', 'publisher']; // only fields in the array can be mass assigned.
     // protected $guarded = ['id']; // all can be mass assigned except id.
 
-    protected $with = ['category', 'user']; // make it eager loading not lazy loading. solves the n+1 problem
+    protected $with = ['category', 'user', 'bookfiles']; // make it eager loading not lazy loading. solves the n+1 problem
 
     public function category() { // assumes category_id so function name needs to match the model name!
         return $this->belongsTo(Category::class);
@@ -20,5 +20,9 @@ class Book extends Model
 
     public function user() { 
         return $this->belongsTo(User::class, 'user_id'); // specify foriegn key explicitly
+    }
+
+    public function bookfiles() { 
+        return $this->hasMany(Bookfile::class); // 
     }
 }

@@ -10,5 +10,12 @@
         <p>出版社：{{ $book->publisher }} </p>
         <p>言語：{{ $book->language }} </p>
         <a href="/categories/{{$book->category->slug}}"><p>言語：{{ $book->category->name }} </p></a>
+        <p>フォーマット：
+            @forelse($book->bookfiles as $bookfile)
+            <span>{{ $bookfile->format }}</span>
+            @empty
+            <span>None</span>
+            @endforelse
+        </p>
         <a href="/">Back</a>
 @endsection
