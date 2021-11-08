@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Models\Book;
 use App\Models\Category;
-
+use App\Http\Controllers\BookController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,26 +15,13 @@ use App\Models\Category;
 |
 */
 
-Route::get('/', function () {
-    // \Illuminate\Support\Facades\DB::listen(function($query) {
-    //     logger($query->sql, $query->bindings);
-    // });
-
-    // return view('books', ['books' => Book::all() ]); // this introduces the n+1 problem!
-    return view('books', [
-        'books' => Book::latest()->get() 
-    ]);
-    // return view('books', ['books' => Book::latest()->with('category', 'user')->get() ]);
-});
-
-Route::get('books/{book:slug}', function (Book $book) {
-    return view('book', [
-        'book' => $book
-    ]);
-});
+Route::get('/', [BookController::class, 'index']);
+Route::post('books', [BookController::class, 'store']);
+Route::get('books/create', [BookController::class, 'create']);
+Route::get('books/{book:slug}',  [BookController::class, 'show']);
 
 Route::get('categories/{category:slug}', function (Category $category) {
-    return view('books', [
+    return view('books.index', [
         'books' => $category->books
         // 'books' => $category->books->load(['category', 'user'])
     ]);

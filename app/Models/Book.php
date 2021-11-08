@@ -9,8 +9,8 @@ class Book extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'author', 'publisher']; // only fields in the array can be mass assigned.
-    // protected $guarded = ['id']; // all can be mass assigned except id.
+    // protected $fillable = ['title', 'author', 'publisher']; // only fields in the array can be mass assigned.
+    protected $guarded = ['id']; // all can be mass assigned except id.
 
     protected $with = ['category', 'user', 'bookfiles']; // make it eager loading not lazy loading. solves the n+1 problem
 
