@@ -3,30 +3,19 @@
 @section('title', '書籍一覧')
 
 @section('content')
+    <div class="">
     @foreach($books as $book)
-    <div class="book-card">
-        <div class="cover-image" style="background-image:url({{ asset('/storage/' .  $book->cover_image)}});">
-        </div>
-        <div class="book-info">
-            <a href="/books/{{$book->slug}}"><h3>{{ $book->title }}</h3></a>
-            <p>著者：{{ $book->author }}</p>
-            <p>出版社：{{ $book->publisher }}</p>
-            <p>言語：{{ $book->language }}</p>
-            <p>分類：{{ $book->category->name }}</p>
-            <p>フォーマット：
-                @forelse($book->bookfiles as $bookfile)
-                <span>{{ $bookfile->format }}</span>
-                @empty
-                <span>None</span>
-                @endforelse
-            </p>
-            <p>作成by：{{$book->user->name}}</p>
-
-            <div class="buttons">
-                <a href="/books/{{$book->slug}}/edit">書籍内容の更新</a>
+    <div class="float-left p-4 ml-3 mb-3 shadow-md  bg-gray-100">
+        <a href="/books/{{$book->slug}}" >
+            <div class="w-56 h-80 bg-no-repeat bg-cover bg-center border border-gray-200" style="background-image:url({{ asset('/storage/' .  $book->cover_image)}});">
             </div>
-        </div>
+            <h3 class="w-56 mt-2">{{ $book->title }}</h3>
+        </a>
     </div>
-    <hr>
     @endforeach
+    </div>
+    <div class="clear-both">
+        {{$books->links()}}
+
+    </div>
 @endsection

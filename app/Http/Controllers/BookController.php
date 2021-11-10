@@ -19,7 +19,7 @@ class BookController extends Controller
         // });
 
         return view('books.index')
-            ->with('books', Book::latest()->get());
+            ->with('books', Book::latest()->paginate(6));
 
         // ** N+1 problem and the solution. We added $with property in Model for eager loading relationships **
         // return view('books', [
@@ -41,7 +41,7 @@ class BookController extends Controller
 
     public function update(Request $request, Book $book) {
         // user input validation
-        @dd($book);
+        // @dd($book);
         $request->validate([
             'title' => 'required|max:255',
             'author' => 'required|max:255',

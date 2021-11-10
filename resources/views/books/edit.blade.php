@@ -12,8 +12,8 @@
         </ul>
     @endif
 
-    <form method="PUT" action="/books/{{$book->slug}}" enctype="multipart/form-data">
-        {{ method_field('PUT') }}
+    <form method="POST" action="/books/{{$book->slug}}" enctype="multipart/form-data">
+        @method('PUT')
         @csrf
         
         書名：<input type="text" name="title" value="{{$book->title}}"> <br>
