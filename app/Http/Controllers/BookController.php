@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Storage;
+
 use Illuminate\Http\Request;
 use App\Models\Book;
 use App\Models\Category;
@@ -32,39 +34,65 @@ class BookController extends Controller
         return view('books.show', ['book' => $book]);
     }
 
+    /* edit an existing entry */
+    public function edit(Book $book) {
+        return view('books.edit', ['book' => $book])->with('categories', Category::get());
+    }
+
+    public function update(Request $request, Book $book) {
+        // user input validation
+        @dd($book);
+        $request->validate([
+            'title' => 'required|max:255',
+            'author' => 'required|max:255',
+            'publisher' => 'max:255',
+            'cover_image' => 'max:250|mimes:jpg,jpeg,png,gif'
+        ]);
+        
+        // validate and store uploaded file.
+        if ($request->hasFile('cover_image') && $request->file('cover_image')->isValid()) {
+            $path = $request->cover_image->store('cover', 'public');
+        } else {
+            $path = null;
+        }
+
+        // create new book entry
+        $fields = $request->only('title', 'author', 'publisher', 'language', 'category_id');
+        $fields['slug'] = mb_eregi_replace('[ 　&!#]', '-', $request->input('title'));
+        $fields['cover_image'] = $path;
+        
+        $book->update( $fields);
+        return redirect('/');
+    }
+
+    /* create a new entry */
     public function create() {
         return view('books.create')->with('categories', Category::get());
     }
 
     public function store(Request $request) {
-        // @dd($request->file('cover_image'));
-        // @dd($request->input('cover_image')); // returns null. need to use $request->file().
-     
-        // upload file validation.
-        // if ($request->hasFile('profile_picture') &&
-        //     $request->file('profile_picture')->isValid()) {
-        //     //
-        // }
-
-        // $request->validate([
-        //     'upload_file' => 'required|max:1024|mimes:jpg,jpeg,png,gif'
-        // ]);
-
-        // php.ini:
-        // post_max_size = 20M
-        // upload_max_filesize = 20M
-
-
-        // $fields = $request->only('title', 'author', 'publisher', 'language', 'category_id', 'cover_image');
-        // $fields['user_id'] = 2;
-        // $fields['slug'] = $request->input('title');
+        // user input validation
+        $request->validate([
+            'title' => 'required|max:255',
+            'author' => 'required|max:255',
+            'publisher' => 'max:255',
+            'cover_image' => 'max:250|mimes:jpg,jpeg,png,gif'
+        ]);
         
-        // Book::create( $fields);
-        // return redirect('/');
+        // validate and store uploaded file.
+        if ($request->hasFile('cover_image') && $request->file('cover_image')->isValid()) {
+            $path = $request->cover_image->store('cover', 'public');
+        }
 
-        $path = $request->cover_image->store('cover');
-        @dd($path);
-     }
+        // create new book entry
+        $fields = $request->only('title', 'author', 'publisher', 'language', 'category_id');
+        $fields['user_id'] = 2;
+        $fields['slug'] = mb_eregi_replace('[ 　&!#]', '-', $request->input('title'));
+        $fields['cover_image'] = $path;
+        
+        Book::create( $fields);
+        return redirect('/');
+    }
 
 
 }

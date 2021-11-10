@@ -19,7 +19,9 @@ Route::get('/', [BookController::class, 'index']);
 // Route::get('/', 'App\Http\Controllers\BookController@index'); // this also works
 Route::post('books', [BookController::class, 'store']);
 Route::get('books/create', [BookController::class, 'create']);
+Route::put('books/{book:slug}',  [BookController::class, 'update'])->name('books.update');
 Route::get('books/{book:slug}',  [BookController::class, 'show']);
+Route::get('books/{book:slug}/edit',  [BookController::class, 'edit'])->name('books.edit');
 
 Route::get('categories/{category:slug}', function (Category $category) {
     return view('books.index', [

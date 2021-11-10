@@ -4,7 +4,14 @@
 
 
 @section('content')
-    <img src="/storage/cover/P4uuLkubtYWiMcbECqAIJ0ZoLO9wLPlm7QR5B26I.jpg" alt="">
+    @if ($errors->any())
+        <ul id="errors">
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    @endif
+
     <form method="POST" action="/books" enctype="multipart/form-data">
         @csrf
         書名：<input type="text" name="title"> <br>
