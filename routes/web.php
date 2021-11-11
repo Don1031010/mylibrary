@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Models\Book;
 use App\Models\Category;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\RegisterController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,3 +30,14 @@ Route::get('categories/{category:slug}', function (Category $category) {
         // 'books' => $category->books->load(['category', 'user'])
     ]);
 });
+
+// user registration
+Route::get('register', [RegisterController::class, 'create'])->middleware('guest');
+Route::post('register', [RegisterController::class, 'store'])->middleware('guest');
+
+
+// play with tailwindcss
+Route::get('tailwind', function(){
+    return view('tailwind');
+});
+
