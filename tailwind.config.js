@@ -14,6 +14,9 @@ module.exports = {
         sky: colors.sky,
         cyan: colors.cyan,
       },
+
+      backgroundSize: {
+      },
     },
   },
   variants: {
