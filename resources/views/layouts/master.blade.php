@@ -11,12 +11,13 @@
         <title>Mylibrary | @yield('title', 'Home')</title>
     </head>
 
-    <body class="max-w-md mx-auto md:max-w-7xl md:pt-10 md:px-4 py-8">
+    <body class="max-w-2xl mx-auto sm:max-w-5xl">
 
-        <div class="mx-auto border-4 border-gray-300 p-2 rounded-3xl">
+        <div class="mx-auto border-4 border-gray-300  rounded-3xl overflow-hidden">
+        {{-- <div class="mx-auto border-4 border-gray-300 p-2 rounded-3xl"> --}}
             @include('partials.header')
             
-            <div class="px-16 py-4">
+            <div class="px-4 md:px-16 py-4">
                 @include('partials.banner')
                 @yield('content')
 

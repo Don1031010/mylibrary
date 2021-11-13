@@ -14,10 +14,10 @@ class BookfileFactory extends Factory
      */
     public function definition()
     {
-        $format = ['audiobook', 'mobi', 'epub', 'docx', 'azw', 'azw3', 'pdf'];
+        $format = ['audio', 'mobi', 'epub', 'docx', 'azw', 'azw3', 'pdf'];
 
         return [
-            'book_id' => rand(1, 3),
+            'book_id' => rand(1, 8),
             'format' => $format[rand(0, 6)],
             'filename' => Str::random(),
             // 'email' => $this->faker->unique()->safeEmail(),

@@ -3,7 +3,7 @@
 </div>
 
 <div id="search-box" 
-    class="w-10/12 mx-auto h-32 -mt-14 mb-20 relative z-10 rounded-2xl shadow-md"
+    class="w-10/12 mx-auto h-24 -mt-10 mb-20 relative z-10 rounded-2xl shadow-md"
     style="background:url({{asset('storage/images/bg-search-left-sm.jpg')}}) no-repeat left bottom,url({{asset('storage/images/bg-search-right-sm.jpg')}}) no-repeat right bottom; background-color:#fff"
 >
     

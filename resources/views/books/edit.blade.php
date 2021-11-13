@@ -38,5 +38,5 @@
         <input type="submit" value="内容を更新"><br><br>
     </form>
 
-    <a href="/">Back</a>
+    <a href="{{ url()->previous(2) }}">Back</a>
 @endsection

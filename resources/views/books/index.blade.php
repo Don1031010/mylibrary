@@ -3,7 +3,8 @@
 @section('title', '書籍一覧')
 
 @section('content')
-    <div class="flex flex-wrap justify-around items-center">
+    <div class="flex flex-wrap ">
+    {{-- <div class="flex flex-wrap justify-between items-center"> --}}
         @foreach($books as $book)
             @include('partials.bookcard', ['book' => $book])
         @endforeach

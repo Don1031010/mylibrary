@@ -16,7 +16,7 @@ class CreateBookfilesTable extends Migration
         Schema::create('bookfiles', function (Blueprint $table) {
             $table->id();
             $table->foreignId('book_id');
-            $table->enum('format', ['audiobook', 'mobi', 'epub', 'docx', 'azw', 'azw3', 'pdf']);
+            $table->enum('format', ['audio', 'mobi', 'epub', 'docx', 'azw', 'azw3', 'pdf']);
             $table->float('duration')->nullable(); // used for audiobooks
             $table->string('narrator')->nullable();
             $table->string('filename');
