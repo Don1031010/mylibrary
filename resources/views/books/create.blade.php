@@ -12,27 +12,47 @@
         </ul>
     @endif
 
-    <form method="POST" action="/books" enctype="multipart/form-data">
+    <form method="POST" action="/books" enctype="multipart/form-data" class="max-w-2xl mx-auto">
         @csrf
-        書名：<input type="text" name="title"> <br>
-        著者：<input type="text" name="author"><br>
-        出版社：<input type="text" name="publisher"><br>
-        言語：
-        <select name="language">
-            <option value="English">English</option>
-            <option value="Japanese">Japanese</option>
-            <option value="Chinese">Chinese</option>
-        </select><br>
-        分類：
-        <select name="category_id">
-            @foreach($categories as $category)
-            <option value="{{$category->id}}">{{$category->name}}</option>
-            @endforeach
-        </select><br>
+        <div class="mb-3">
+            <label for="" class="block mb-2 font-bold text-gray-700 text-sm" for="title"><span class="text-red-600 font-bold">*</span>書名：</label>
+            <input type="text" name="title" id="title" class="border border-gray-400 p-1 w-full text-sm"> 
+        </div>
         
-        表紙画像：<input type="file" name="cover_image"><br><br>
+        <div class="mb-3">
+            <label for="" class="block mb-2 font-bold text-gray-700 text-sm" for="author"><span class="text-red-600 font-bold">*</span>著者：</label>
+            <input type="text" name="author" id="author" class="border border-gray-400 p-1 w-full text-sm"> 
+        </div>
+        
+        <div class="mb-3">
+            <label for="" class="block mb-2 font-bold text-gray-700 text-sm" for="publisher">出版社：</label>
+            <input type="text" name="publisher" id="publisher" class="border border-gray-400 p-1 w-full text-sm"> 
+        </div>
 
-        <input type="submit" value="新規追加"><br><br>
+        <div class="mb-3">
+            <label for="" class="block mb-2 font-bold text-gray-700 text-sm" for="language"><span class="text-red-600 font-bold">*</span>言語：</label>
+            <select name="language" id="language"  class="border border-gray-400 p-1 w-full text-sm">
+                <option value="English">English</option>
+                <option value="Japanese">Japanese</option>
+                <option value="Chinese">Chinese</option>
+            </select><br>
+        </div>
+
+        <div class="mb-3">
+            <label for="" class="block mb-2 font-bold text-gray-700 text-sm" for="category_id"><span class="text-red-600 font-bold">*</span>分類：</label>
+            <select name="category_id" id="category_id"  class="border border-gray-400 p-1 w-full text-sm">
+                @foreach($categories as $category)
+                <option value="{{$category->id}}">{{$category->name}}</option>
+                @endforeach
+            </select>
+        </div>
+        
+        <div class="mb-3">
+            <label for="" class="block mb-2 font-bold text-gray-700 text-sm" for="cover_image">表紙画像：</label>
+            <input type="file" name="cover_image" id="cover_image" class=" text-sm">
+        </div>
+
+        <input type="submit" value="新規追加" class="mt-4 px-4 py-1 text-sm bg-white border border-black rounded-xl hover:text-white hover:bg-gray-700 hover:border-transparent cursor-pointer">
     </form>
 
     <a href="/">Back</a>

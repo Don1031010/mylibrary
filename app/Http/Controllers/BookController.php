@@ -52,17 +52,24 @@ class BookController extends Controller
         // validate and store uploaded file.
         if ($request->hasFile('cover_image') && $request->file('cover_image')->isValid()) {
             $path = $request->cover_image->store('cover', 'public');
+            // TODO: remove old image file if any //
         } else {
             $path = null;
         }
 
-        // create new book entry
-        $fields = $request->only('title', 'author', 'publisher', 'language', 'category_id');
-        $fields['slug'] = mb_eregi_replace('[ 　&!#]', '-', $request->input('title'));
-        $fields['cover_image'] = $path;
+        // update changed book entries
+        $fields = [];
+        foreach($request->only('title', 'author', 'publisher', 'language', 'category_id') as $key => $value) {
+            if($book[$key] != $value) $fields[$key] = $value;
+        }
+        if(array_key_exists('title', $fields)) {
+            $fields['slug'] = mb_eregi_replace('[ 　&!#]', '-', $fields['title']);
+        }
+        if($path) $fields['cover_image'] = $path;
         
-        $book->update( $fields);
-        return redirect('/');
+        if(!empty($fields))  $book->update( $fields);
+
+        return redirect("/books/$book->slug");
     }
 
     /* create a new entry */
